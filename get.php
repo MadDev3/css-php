@@ -13,9 +13,11 @@ class UNI
 }
 
 if (isset($_POST['get'])) {
-    $arr = $_POST['arr'];
-    $get = UNI::get('YOU_MySQL_CODE'); // Предположим есть таблица "table". Впишите сюда MySQL запрос чтобы получить колонки (id, name и date)
+    $arr = (array) json_decode($_POST['arr']);
+    //$get = UNI::get('SELECT id, name, date FROM table'); // Предположим есть таблица "table". Впишите сюда MySQL запрос чтобы получить колонки (id, name и date)
     //$arr['table'] = $get;
     $arr['table'] = array('id' => 1, 'name' => 'new', 'date' => '2022.05.16'); // Т.к. таблица предполагаемая, то симулируем.
-    echo true; // в echo отдайте $arr в json формате
+    // echo true; // в echo отдайте $arr в json формате
+    header('Content-type: application/json');
+    echo json_encode($arr);
 }
